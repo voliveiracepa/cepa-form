@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commentary Drive (CD)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 80%;
+            max-width: 1000px;
+            margin-top: 20px;
+        }
+        .header {
+            background-color: #FF0000;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            color: white;
+            padding: 10px;
+            font-size: 24px;
+        }
+        .intro-text {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #555;
+            text-align: left;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 3px;
+        }
+        .column {
+            display: inline-block;
+            width: 45%;
+            padding: 10px;
+            vertical-align: top;
+            margin-right: 5px;
+            border-right: 1px solid #ccc; /* Linha vertical de separação */
+        }
+        .column:last-child {
+            border-right: none; /* Remove a borda da última coluna */
+        }
+        .column-title {
+            background-color: #FF0000;
+            color: white;
+            padding: 10px;
+            font-size: 14px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            margin-bottom: 10px;
+
+        }
+        .question {
+		
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+	    text-align: center;
+        }
+        .answer {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+	    height: 20px; /* Defina a altura desejada */
+	    word-wrap: break-word;
+    	    overflow: auto;
+    	    white-space: pre-wrap; 
+        }
+        .driver_name {
+            width: 40%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+	    height: 20px; /* Defina a altura desejada */
+	    word-wrap: break-word;
+    	    overflow: auto;
+   	    resize: vertical;
+    	    white-space: pre-wrap; 
+        }
+
+        .plate {
+            width: 7%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+	    height: 20px; /* Defina a altura desejada */
+	    word-wrap: break-word;
+    	    overflow: auto;
+   	    resize: vertical;
+    	    white-space: pre-wrap; 
+        }
+
+       .submit-button {
+            background-color: #FF0000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .submit-button:hover {
+            background-color: #CC0000;
+        }
+        .button-container {
+            text-align: right;
+            margin-top: 20px;
+        }
+	.images-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .left-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .center-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .right-images {
+            flex: 1;
+            text-align: right;
+        }
+
+        .image {
+            max-width: 150px;
+            margin: 10px;
+        }
+
+        .titles{
+            background-color: #ff5e00f3;
+            color: white;
+            padding:1px;
+            font-size: 20px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            margin-bottom: 0px;
+        }
+
+        .subtitles{
+            background-color: #ff5e00f3;
+            color: white;
+            padding:1px;
+            font-size: 15px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            margin-bottom: 0px;
+        }
+
+        .button1{
+            border: 1px solid #ccc;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 35%;
+            text-align: center;
+        }
+
+        .button {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        color: #333;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    /* Estilo para o botão selecionado */
+    .button.selected {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .column-container {
+        display: flex;
+    }
+
+    .column {
+        flex: 1;
+        padding: 0 30px;
+    }
+    </style>
+</head>
+<script>
+    function convertToUpper() {
+        var inputField = document.getElementById("driver_name");
+        inputField.value = inputField.value.toUpperCase();
+        var inputField_1 = document.getElementById("plate");
+        inputField_1.value = inputField_1.value.toUpperCase();
+    }
+</script>
+<script>
+    // Função para obter a data atual no formato 'YYYY-MM-DD'
+    function getCurrentDate() {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = String(now.getMonth() + 1).padStart(2, '0');
+        var day = String(now.getDate()).padStart(2, '0');
+        return year + '-' + month + '-' + day;
+    }
+
+    window.onload = function() {
+        var dateInput = document.getElementById('accident_date');
+        // Definir o atributo 'max' do elemento para a data atual
+        dateInput.setAttribute('max', getCurrentDate());
+    };
+</script>
+<script>
+    function showHideEventFields() {
+        var eventClassification = document.querySelector('input[name="event_classification"]:checked').value;
+        var eventTypeField = document.getElementById('event_type_field');
+
+        if (eventClassification === 'Acidente') {
+            eventTypeField.style.display = 'block';
+        } else {
+            eventTypeField.style.display = 'none';
+        }
+    }
+</script>
+<body>
+    <div class="container">
+	<div class="images-container">
+            <div class="left-image">
+                <img src="CEPA-MOBILITY_logo-principal 750px.png" alt="Imagem 1" class="image">
+            </div>
+            <div class="center-image">
+                <img src="fdm_pro.png" alt="Imagem 2" class="image">
+            </div>
+            <div class="right-images">
+                <img src="brazil-.png" alt="Imagem 3" class="image">
+            </div>
+        </div>
+        <form>
+            <fieldset>
+                    <div class="titles"><p>COMUNICAÇÃO DE ACIDENTE COM VEÍCULO DA FROTA</p></div>
+                    <br>
+                <div>
+                    <div class="subtitles"><p>DADOS DO CONDUTOR / VEÍCULO</p></div>
+                    <br>
+                    <label>Nome Completo:</label>
+                    <input type="text" name="driver_name" id="driver_name" class="driver_name" onkeyup="convertToUpper()">
+                    <br>
+                    <br>
+                    <label>ID da Corporação:</label>
+                    <input type="text" name="id_corp" id="id_corp" class="driver_name">
+                    <br>
+                    <br>
+                    <label>Data de Nascimento:</label>
+                    <input type="date" name="birth_date" id="date">
+                    <label>Data Ingresso na Cia:</label>
+                    <input type="date" name="birth_date" id="date">
+                    <br>
+                    <br>
+                    <label>Placa do Veículo</label>
+                    <input type="text" name="plate" id="plate" class="plate" onkeyup="convertToUpper()" maxlength="7">
+                    <br>
+                    <div class="subtitles"><p>DADOS DO ACIDENTE</p></div>
+                    <br>
+                    <label>No momento do acidente estava a serviço da Companhia?</label>
+                    <input type="radio" name="at working" value="Sim">Sim
+                    <input type="radio" name="at working" value="Não">Não
+                    <br>
+                    <br>
+                    <label>Boletim de Ocorrência?</label>
+                    <input type="file" name="bo" accept=".jpeg, .jpg, .png, .pdf">
+                    <br>
+                    <br>
+                    <label>Local do Acidente:</label>
+                    <input type="text" name="accident_local" id="accident_local" class="driver_name">
+                    <label>Estado:</label>
+                    <select name="state" id="state">
+                        <option value="">Selecione o estado</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+                    <br>
+                    <label>Data do Acidente:</label>
+                    <input type="date" name="accident_date" id="accident_date">
+                    <label>Hora do Acidente:</label>
+                    <input type="time" name="accident_time" id="accident_time">
+                    <br>
+                    <br>
+                    <label>Considera-se responsável pelo acidente?</label>
+                    <input type="radio" name="responsable" value="Sim">Sim
+                    <input type="radio" name="responsable" value="Não">Não
+                    <br>
+                    <br>
+                    <div class="column-container">
+                        <div class="column">
+                            <label>Pavimento:</label><br><br>
+                            <input type="radio" name="pavimento" value="Cascalho">Cascalho<br>
+                            <input type="radio" name="pavimento" value="Em bom estado">Em bom estado<br>
+                            <input type="radio" name="pavimento" value="Em estado regular">Em estado regular<br>
+                            <input type="radio" name="pavimento" value="Em manutenção/obras">Em manutenção/obras<br>
+                            <input type="radio" name="pavimento" value="Em mau estado">Em mau estado<br>
+                            <input type="radio" name="pavimento" value="Terra">Terra<br>
+                        </div>
+                        <div class="column">
+                            <label>Condição:</label><br><br>
+                            <input type="radio" name="condition" value="Em Reparação">Cascalho<br>
+                            <input type="radio" name="condition" value="Escorregadio">Em bom estado<br>
+                            <input type="radio" name="condition" value="Seco">Seco<br>
+                            <input type="radio" name="condition" value="Úmido">Úmido<br>
+                        </div>
+                        <div class="column">
+                            <label>Iluminação:</label><br><br>
+                            <input type="radio" name="lighting" value="Escuro">Escuro<br>
+                            <input type="radio" name="lighting" value="Luz artificial">Luz artificial<br>
+                            <input type="radio" name="lighting" value="Penumbra">Penumbra<br>
+                            <input type="radio" name="lighting" value="Pleno dia">Pleno dia<br>
+                        </div>
+                    </div>
+                    <br>
+                    <label>Insira o(s) arquvios que julgar relevantes para nossa análise(.jpeg, .png, .pdf)</label>
+                    <br>
+                    <br>
+                    <input type="file" name="relevant_files" accept=".jpeg, .jpg, .png, .pdf" multiple>
+                    <br>
+                    <div class="question">Relato:</div>
+                    <textarea class="answer" placeholder="Descreva aqui o relato do acidente"></textarea>
+            </fieldset>
+        </form>
+
+<script>
+    function enableTextField() {
+        document.getElementById("description").disabled = false;
+    }
+
+    function disableTextField() {
+        document.getElementById("description").disabled = true;
+    }
+</script>
+
+<script>
+function chooseOption() {
+    // Aqui você pode adicionar o código para lidar com a escolha do usuário
+    // Por exemplo, você pode fazer alguma ação com base na opção escolhida
+    alert("Você escolheu a opção: Driver does not have a cargo cover");
+}
+</script>
+
+<script>
+    function selectButton(buttonIndex) {
+        var buttons = document.querySelectorAll('.button');
+        buttons.forEach(function(button, index) {
+            if (index + 1 === buttonIndex) {
+                button.classList.add('selected');
+            } else {
+                button.classList.remove('selected');
+            }
+        });
+    }
+</script>
+
+<script>
+    function enableButtons() {
+        // Habilita os botões quando o botão "No" é selecionado
+        document.getElementById("button1").disabled = false;
+        document.getElementById("button2").disabled = false;
+        document.getElementById("button1").disabled = false;
+        document.getElementById("button2").disabled = false;
+    }
+
+    function disableButtons() {
+        // Desabilita os botões quando uma opção diferente de "No" é selecionada
+        document.getElementById("button1").disabled = true;
+        document.getElementById("button2").disabled = true;
+        document.getElementById("button1").disabled = true;
+        document.getElementById("button2").disabled = true;
+    }
+</script>
+
+            <div class="button-container">
+                <button type="submit" class="submit-button">Submit Answers</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

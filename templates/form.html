@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Eventos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 80%;
+            max-width: 1000px;
+            margin-top: 20px;
+        }
+        .header {
+            background-color: #8D0056;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            color: white;
+            padding: 10px;
+            font-size: 24px;
+        }
+
+        .form_box{
+            border: 1px solid #ff5e00f3; /* Define a largura e a cor da borda */
+            border-radius: 5px; /* Define o arredondamento das bordas */
+            padding: 10px; /* Adiciona algum espaçamento interno, opcional */
+        }
+
+        .intro-text {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #555;
+            text-align: justify;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 3px;
+        }
+        .column {
+            display: inline-block;
+            width: 45%;
+            padding: 10px;
+            vertical-align: top;
+            margin-right: 5px;
+            border-right: 1px solid #ccc; /* Linha vertical de separação */
+        }
+
+        .column_questions {
+            display: inline-block;
+            width: 30%;
+            padding: 10px;
+            vertical-align: top;
+            margin-right: 5px;
+            border-right: 1px solid #ccc; /* Linha vertical de separação */
+        }
+        
+        .custom-radio {
+            display: inline-block;
+            background-color: #ffffff; /* Cor de fundo */
+            color: #8D0056; /* Cor das letras */
+            padding: 0px; /* Espaçamento interno para tornar os botões retangulares */
+            border-radius: 5px; /* Bordas arredondadas */
+            border: 2px solid #ff5e00f3;
+            margin: 5px; /* Espaçamento entre os botões */
+            cursor: pointer; /* Cursor de ponteiro para indicar clicável */
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transição suave para mudanças de fundo */
+        }
+
+        .custom-radio:hover {
+            background-color: #ff5e00f3; /* Cor de fundo ao passar o mouse */
+            color: white; /* Cor das letras ao passar o mouse */
+        }
+
+        .custom-radio input[type="radio"] {
+            display: none; /* Esconde o input original do radio button */
+        }
+
+        .custom-radio input[type="radio"]:checked + span {
+            background-color: #ff5e00f3; /* Cor de fundo quando o radio button está selecionado */
+            color: white; /* Cor das letras quando selecionado */
+        }
+
+        .custom-radio span {
+            display: inline-block;
+            padding: 10px 20px; /* Mantém o espaçamento interno */
+            border-radius: 5px; /* Mantém as bordas arredondadas */
+            transition: background-color 0.3s, color 0.3s; /* Transição suave para mudanças de fundo e cor */
+        }
+        .question {
+            background-color: #ffffff;
+            font-size: 16px;
+	        text-align: justify;
+        }
+        .answer {
+            width: 60%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+	        height: 20px; /* Defina a altura desejada */
+	        word-wrap: break-word;
+    	    overflow: auto;
+    	    white-space: pre-wrap; 
+        }
+        .answer1 {
+            width: 40%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+	        height: 20px; /* Defina a altura desejada */
+	        word-wrap: break-word;
+    	    overflow: auto;
+    	    white-space: pre-wrap; 
+        }
+
+       .submit-button {
+            background-color: #ff5e00f3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .submit-button:hover {
+            background-color: #ff5e00f3;
+        }
+
+	    .images-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .left-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .center-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .right-images {
+            flex: 1;
+            text-align: right;
+        }
+
+        .titles{
+            background-color: #ff5e00f3;
+            color: white;
+            padding:1px;
+            font-size: 20px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            margin-bottom: 0px;
+        }
+
+        .subtitles{
+            background-color: #ff5e00f3;
+            color: white;
+            padding:1px;
+            font-size: 16px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            margin-bottom: 0px;
+        }
+
+        .subtitles-modal{
+            background-color: #999999bb;
+            color: white;
+            padding:1px;
+            font-size: 14px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            margin-bottom: 0px;
+        }
+
+        .button {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            color: #333;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .error {
+            border: 2px solid red;
+        }
+        .modal {
+            /* display: none;  Oculta o modal por padrão */
+            position: fixed; /* Mantém o modal fixo na tela */
+            z-index: 1; /* Define a ordem de empilhamento do modal */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Adiciona rolagem se o conteúdo for maior que a tela */
+            background-color: rgba(0,0,0,0.4); /* Fundo escuro semi-transparente */
+        }
+
+        .column-modal {
+            display: inline-block;
+            width: 30%;
+            padding: 10px;
+            vertical-align: top;
+            margin-right: 5px;
+            border-right: 1px solid #ccc; /* Linha vertical de separação */
+            color: black;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Estilo do conteúdo do modal */
+        .modal-content {
+            background-color: #fefefe; /* Cor do fundo do modal */
+            margin: 15% auto; /* Centraliza verticalmente o modal */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Largura do modal */
+            max-width: 1000px; /* Largura máxima do modal */
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra do modal */
+            position: relative; /* Posição relativa para facilitar o posicionamento de elementos internos */
+        }
+
+        /* Estilo do botão de fechar do modal */
+        .close {
+            color: white;
+            margin: 7px;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .custom-select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .text-field {
+            width: 600px; /* Tamanho fixo desejado */
+            height: 50px; /* Altura fixa desejada */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            resize: none; /* Impede redimensionamento */
+        }
+        .align {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="images-container">
+            <div class="left-image">
+                <img src="C:\Users\vinicius oshiro\PycharmProjects\CEPA\cepa\CEPA-MOBILITY_logo-principal 750px.png" alt="Imagem 1" class="image">
+            </div>
+            <div class="center-image">
+                <img src="C:\Users\vinicius oshiro\PycharmProjects\CEPA\cepa\fdm_pro.png" alt="Imagem 2" class="image">
+            </div>
+            <div class="right-images">
+                    <img src="C:\Users\vinicius oshiro\PycharmProjects\CEPA\cepa\brazil-.png" alt="Imagem 3" class="image">    
+            </div>
+        </div>
+    <form id="eventForm" action="{{ url_for('submit') }}" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <div class="titles"><p>COMUNICAÇÃO DE ACIDENTE COM VEÍCULO DA FROTA</p></div><br>
+        <div>
+            <div class="subtitles"><p>DADOS DO CONDUTOR / VEÍCULO</p></div><br>
+                <div class="column">
+                    <label class="question" for="driver_name">Nome:</label>
+                        <input type="text" id="driver_name" name="driver_name" class="answer" required><br><br>
+                    <label class="question" for="driver_email">E-mail:</label>
+                        <input type="text" id="driver_email" name="driver_email" class="answer" required><br><br>
+                    <label for="id_corp">ID da Corporação:</label>
+                        <input type="text" id="id_corp" name="id_corp" class="answer1" required><br><br>
+                </div>
+            <div class="column">
+                <label class="question" for="ald_number">Nº. do chamado ALD:</label>
+                    <input type="text" id="ald_number" name="ald_number" class="answer1" required><br><br>
+                <label for ="birth_date">Data de Nascimento:</label>
+                    <input type="date" name="birth_date" id="birth_date" class="answer1" required><br>
+                <label for="joining_date">Data Ingresso na Cia:</label>
+                    <input type="date" name="joining_date" id="joining_date" class="answer1"><br><br>
+                <label for="plate">Placa:</label>
+                    <input type="text" id="plate" name="plate" class="answer1" maxlength="7" required><br><br>
+            </div>
+            <div class="subtitles"><p>DADOS DO EVENTO</p></div><br>
+                <div class="column">
+                    <label for="event_date">Data do Evento:</label>
+                        <input type="date" id="event_date" name="event_date" class="answer1" required><br>
+                    <label for="event_time">Hora do Evento:</label>
+                        <input type="time" name="event_time" id="event_time" class="answer1" required><br><br>
+                    <label for="event_place">Local do Acidente:</label>
+                        <input type="text" name="event_place" id="event_place" class="answer" required>
+                    <label for="event_state">Estado:</label>
+                        <select name="event_state" id="event_state" class="custom-select" required>
+                            <option value="">Selecione o estado</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                </div>
+                <div class="column">
+                    <label class="question" for="at_working">No momento do acidente estava a serviço da Companhia?
+                        <label class="custom-radio">
+                            <input type="radio" name="at_working" id="radio-sim" value="Sim" required>
+                            <span>Sim</span>
+                        </label>
+                        <label class="custom-radio">
+                            <input type="radio" name="at_working" id="radio-nao" value="Não" required>
+                            <span>Não</span>
+                        </label>
+                    </label>
+                    <br>
+                    <br>
+                    <label class="question" for="evitable">Considera-se responsável pelo acidente?<br>
+                        <label class="custom-radio">
+                            <input type="radio" name="evitable" id="radio-sim-evitable" value="Sim" required>
+                            <span>Sim</span>
+                        </label>
+                        <label class="custom-radio">
+                            <input type="radio" name="evitable" id="radio-nao-evitable" value="Não" required>
+                            <span>Não</span>
+                        </label>
+                    </label>
+                </div>
+                <br>
+                <br>
+                <div class="align">
+                    <label class="question" for="event_description">Descrição do Evento:</label>
+                    <textarea class="text-field" id="event_description" name="event_description" placeholder="Descreva aqui o relato do acidente" required></textarea>
+                </div>
+                <br>
+                <div class="subtitles"><p>CONDIÇÕES DE PAVIMENTO</p></div><br>
+                <div class="column_questions">
+                    <label class="question" for="lightning">Iluminação:<br><br>
+                        <label class="custom-radio">
+                            <input type="radio" name="lightning" id="escuro" value="Escuro" required>
+                            <span>Escuro</span>
+                        </label>
+                        <br>
+                        <label class="custom-radio">
+                            <input type="radio" name="lightning" id="luz-articial" value="Luz Artificial" required>
+                            <span>Luz Artificial</span>
+                        </label>
+                        <br>
+                        <label class="custom-radio">
+                            <input type="radio" name="lightning" id="penumbra" value="Penumbra" required>
+                            <span>Penumbra</span>
+                        </label>
+                        <br>
+                        <label class="custom-radio">
+                            <input type="radio" name="lightning" id="pleno-dia" value="Pleno dia" required>
+                            <span>Pleno dia</span>
+                        </label>
+                    </label>
+                </div>
+                <div class="column_questions">
+                    <label class="question" for="floor">Pavimento:<br><br>
+                        <label class="custom-radio">
+                            <input type="radio" name="floor" id="cascalho" value="Cascalho" required>
+                            <span>Cascalho</span>
+                        </label>
+                        <br>
+                        <label class="custom-radio">
+                            <input type="radio" name="floor" id="em-bom-estado" value="Em bom estado" required>
+                            <span>Em bom estado</span>
+                        </label>
+                        <br>
+                        <label class="custom-radio">
+                            <input type="radio" name="floor" id="em-estado-regular" value="Em estado regular" required>
+                            <span>Em estado regular</span>
+                        </label>
+                        <br>
+                        <label class="custom-radio">
+                            <input type="radio" name="floor" id="em-manutencao" value="Em manutenção/obras" required>
+                            <span>Em manutenção/obras</span>
+                        </label>
+                        <br>
+                        <label class="custom-radio">
+                            <input type="radio" name="floor" id="em-mau-estado" value="Em mau estado" required>
+                            <span>Em mau estado</span>
+                        </label>
+                        <br>
+                        <label class="custom-radio">
+                            <input type="radio" name="floor" id="terra" value="Terra" required>
+                            <span>Terra</span>
+                        </label>
+                    </label>
+                </div>
+                <div class="column_questions">
+                    <label class="question" for="floor_condition">Condição:<br><br>
+                        <label class="custom-radio">
+                            <input type="radio" name="floor_condition" id="em-reparacao" value="Em Reparação" required>
+                            <span>Em Reparação</span>
+                        </label>
+                        <br>
+                        <label class="custom-radio">
+                            <input type="radio" name="floor_condition" id="escorregadio" value="Escorregadio" required>
+                            <span>Escorregadio</span>
+                        </label>
+                        <br>
+                        <label class="custom-radio">
+                            <input type="radio" name="floor_condition" id="seco" value="Seco" required>
+                            <span>Seco</span>
+                        </label>
+                        <br>
+                        <label class="custom-radio">
+                            <input type="radio" name="floor_condition" id="umido" value="Úmido" required>
+                            <span>Úmido</span>
+                        </label>
+                    </label>
+                </div>
+            <br>
+            <br>
+        </div>
+        <br>
+        <br>
+        <div class="subtitles"><p>DOCUMENTOS OBRIGATÓRIOS</p></div><br>
+        <label for="reportFile">Boletim de Ocorrência (PDF):</label>
+        <input type="file" id="reportFile" name="reportFile" accept=".pdf" class="answer" required><br><br>
+        <label for="photos">Fotos do Acidente (JPEG, JPG, PNG):</label>
+        <input type="file" id="photos" name="photos" accept=".jpeg,.jpg,.png" class="answer" multiple required><br><br>
+        </fieldset>
+        <br>
+        <button type="button" class="submit-button" onclick="handleFormSubmit()">Enviar</button>
+
+        <div id="myModal" class="modal">
+            <!-- Conteúdo do modal -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <div class="subtitles"><p>Confirmação dos dados</p></div>
+                <div class="column-modal">
+                    <div class="subtitles-modal"><p>Dados do Condutor / Veículo</p></div>
+                    <p><strong>Nome:</strong> <span id="confirmedDriverName"></span></p>
+                    <p><strong>Email:</strong> <span id="confirmedDriverEmail"></span></p>
+                    <p><strong>ID da Corporação:</strong> <span id="confirmedDriverIdCorp"></span></p>
+                    <p><strong>Nº. chamado ALD:</strong> <span id="confirmedAldNumber"></span></p>
+                    <p><strong>Data de Nascimento:</strong> <span id="confirmedBirthDate"></span></p>
+                    <p><strong>Data de Ingresso na Cia.:</strong> <span id="confirmedJoiningDate"></span></p>
+                    <p><strong>Placa do Veículo:</strong> <span id="confirmedPlateID"></span></p>
+                </div>
+                <div class="column-modal">
+                    <div class="subtitles-modal"><p>Dados do Evento</p></div>
+                    <p><strong>Data:</strong> <span id="confirmedEventDate"></span></p>
+                    <p><strong>Hora:</strong> <span id="confirmedEventTime"></span></p>
+                    <p><strong>Local:</strong> <span id="confirmedEventPlace"></span></p>
+                    <p><strong>Estado:</strong> <span id="confirmedEventState"></span></p>
+                    <p><strong>No momento do acidente estava a serviço da Companhia?</strong> <span id="confirmedAtWorking"></span></p>
+                    <p><strong>Considera-se responsável pelo acidente?</strong> <span id="confirmedEvitable"></span></p>
+                </div>
+                <div class="column-modal">
+                    <div class="subtitles-modal"><p>Condições de Pavimento</p></div>
+                    <p><strong>Iluminação:</strong> <span id="confirmedLightning"></span></p>
+                    <p><strong>Pavimento:</strong> <span id="confirmedFloor"></span></p>
+                    <p><strong>Condição:</strong> <span id="confirmedFloorCondition"></span></p>
+                    <div class="subtitles-modal"><p>Relato do Evento</p></div>
+                    <p><span id="confirmedEventDescription"></span></p>
+                </div>
+                <button type="submit" class="submit-button">Enviar</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        function validateForm() {
+            var requiredFields = document.querySelectorAll('[required]');
+            var isValid = true;
+            requiredFields.forEach(function(field) {
+                if (!field.value) {
+                    field.classList.add('error');
+                    isValid = false;
+                } else {
+                    field.classList.remove('error');
+                }
+            });
+
+            if (!isValid) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return false;
+            }
+
+            // Verificar se todos os botões de rádio obrigatórios foram selecionados
+            var radioGroups = {
+                'at_working': 'No momento do acidente estava a serviço da Companhia?',
+                'evitable': 'Considera-se responsável pelo acidente?',
+                'lightning': 'Iluminação',
+                'floor': 'Pavimento',
+                'floor_condition': 'Condição'
+            };
+
+            for (var groupName in radioGroups) {
+                var radios = document.getElementsByName(groupName);
+                var isGroupChecked = Array.from(radios).some(radio => radio.checked);
+                if (!isGroupChecked) {
+                    isValid = false;
+                    alert('Por favor, selecione uma opção para a pergunta: ' + radioGroups[groupName]);
+                    break;
+                }
+            }
+
+            return isValid;
+        }
+
+        document.getElementById('eventForm').addEventListener('submit', function(event) {
+            if (!validateForm()) {
+                event.preventDefault();
+            }
+        });
+    </script>
+    <script>
+        // Função para abrir o modal e exibir os dados inseridos
+        function openModal() {
+            // Acessando os valores dos campos do formulário
+            var driverName = document.getElementById('driver_name').value;
+            var driverEmail = document.getElementById('driver_email').value;
+            var driverIdCorp = document.getElementById('id_corp').value;
+            var aldNumber = document.getElementById('ald_number').value;
+            var birthDate = document.getElementById('birth_date').value;
+            var joiningDate = document.getElementById('joining_date').value;
+            var plateID = document.getElementById('plate').value;
+
+            var eventDate = document.getElementById('event_date').value;
+            var eventTime = document.getElementById('event_time').value;
+            var eventPlace = document.getElementById('event_place').value;
+            var eventState = document.getElementById('event_state').value;
+            // var eventEvitable = document.getElementById('evitable').value;
+
+            // var Lightning = document.getElementById('lightning').value;
+            // var Floor = document.getElementById('floor').value;
+            // var FloorCondition = document.getElementById('floor_condition').value;
+
+            var eventDescription = document.getElementById('event_description').value;
+    
+            // Inserindo os valores no modal
+            document.getElementById('confirmedDriverName').innerText = driverName;
+            document.getElementById('confirmedDriverEmail').innerText = driverEmail;
+            document.getElementById('confirmedDriverIdCorp').innerText = driverIdCorp;
+            document.getElementById('confirmedAldNumber').innerText = aldNumber;
+            document.getElementById('confirmedBirthDate').innerText = birthDate;
+            document.getElementById('confirmedJoiningDate').innerText = joiningDate;
+            document.getElementById('confirmedPlateID').innerText = plateID;
+
+            document.getElementById('confirmedEventDate').innerText = eventDate;
+            document.getElementById('confirmedEventTime').innerText = eventTime;
+            document.getElementById('confirmedEventPlace').innerText = eventPlace;
+            document.getElementById('confirmedEventState').innerText = eventState;
+            // document.getElementById('confirmedEvitable').innerText = eventEvitable;
+
+            // document.getElementById('confirmedLightining').innerText = Lightning;
+            // document.getElementById('confirmedFloor').innerText = Floor;
+            // document.getElementById('confirmedFloorCondition').innerText = FloorCondition;
+
+            document.getElementById('confirmedEventDescription').innerText = eventDescription;
+    
+            // Abrindo o modal
+            var modal = document.getElementById('myModal');
+            modal.style.display = "block";
+        }
+
+        function handleFormSubmit() {
+            if (validateForm()) {
+                openModal();
+            }
+        }
+    
+        // Função para fechar o modal
+        function closeModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
+    
+        // Fechar o modal quando o usuário clicar no botão de fechar
+        var closeBtn = document.getElementsByClassName('close')[0];
+        closeBtn.onclick = function() {
+            closeModal();
+        }
+    
+        // Fechar o modal quando o usuário clicar fora do conteúdo do modal
+        window.onclick = function(event) {
+            var modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+    <script>
+        var radioSim = document.getElementById('radio-sim');
+        var radioNao = document.getElementById('radio-nao');
+        var confirmedAtWorking = document.getElementById('confirmedAtWorking');
+    
+        radioSim.addEventListener('change', function() {
+            confirmedAtWorking.innerText = radioSim.value;
+        });
+    
+        radioNao.addEventListener('change', function() {
+            confirmedAtWorking.innerText = radioNao.value;
+        });
+    </script>
+    <script>
+        var radioSimEvit = document.getElementById('radio-sim-evitable');
+        var radioNaoEvit = document.getElementById('radio-nao-evitable');
+        var confirmedEvitable = document.getElementById('confirmedEvitable');
+    
+        radioSimEvit.addEventListener('change', function() {
+            confirmedEvitable.innerText = radioSimEvit.value;
+        });
+    
+        radioNaoEvit.addEventListener('change', function() {
+            confirmedEvitable.innerText = radioNaoEvit.value;
+        });
+    </script>
+    <script>
+        var radioEscuro = document.getElementById('escuro');
+        var radioLuzArtificial = document.getElementById('luz-artificial');
+        var radioPenumbrar = document.getElementById('penumbra');
+        var radioPlenoDia = document.getElementById('pleno-dia');
+        var confirmedLightning = document.getElementById('confirmedLightning');
+    
+        radioEscuro.addEventListener('change', function() {
+            confirmedLightning.innerText = radioEscuro.value;
+        });
+    
+        radioLuzArtificial.addEventListener('change', function() {
+            confirmedLightning.innerText = radioLuzArtificial.value;
+        });
+    
+        radioPenumbrar.addEventListener('change', function() {
+            confirmedLightning.innerText = radioPenumbrar.value;
+        });
+    
+        radioPlenoDia.addEventListener('change', function() {
+            confirmedLightning.innerText = radioPlenoDia.value;
+        });
+    </script>
+    <script>
+        var radioCascalho = document.getElementById('cascalho');
+        var radioEmBomEstado = document.getElementById('em-bom-estado');
+        var radioEmEstadoRegular = document.getElementById('em-estado-regular');
+        var radioEmManutencao = document.getElementById('em-manutencao');
+        var radioEmMauEstado = document.getElementById('em-mau-estado');
+        var radioTerra = document.getElementById('terra');
+        var confirmedFloor = document.getElementById('confirmedFloor');
+    
+        radioCascalho.addEventListener('change', function() {
+            confirmedFloor.innerText = radioCascalho.value;
+        });
+    
+        radioEmBomEstado.addEventListener('change', function() {
+            confirmedFloor.innerText = radioEmBomEstado.value;
+        });
+    
+        radioEmEstadoRegular.addEventListener('change', function() {
+            confirmedFloor.innerText = radioEmEstadoRegular.value;
+        });
+    
+        radioEmManutencao.addEventListener('change', function() {
+            confirmedFloor.innerText = radioEmManutencao.value;
+        });
+    
+        radioEmMauEstado.addEventListener('change', function() {
+            confirmedFloor.innerText = radioEmMauEstado.value;
+        });
+    
+        radioTerra.addEventListener('change', function() {
+            confirmedFloor.innerText = radioTerra.value;
+        });
+    </script>
+    <script>
+        var radioEmReparacao = document.getElementById('em-reparacao');
+        var radioEscorregadio = document.getElementById('escorregadio');
+        var radioSeco = document.getElementById('seco');
+        var radioUmido = document.getElementById('umido');
+        var confirmedFloorCondition = document.getElementById('confirmedFloorCondition');
+    
+        radioEmReparacao.addEventListener('change', function() {
+            confirmedFloorCondition.innerText = radioEmReparacao.value;
+        });
+    
+        radioEscorregadio.addEventListener('change', function() {
+            confirmedFloorCondition.innerText = radioEscorregadio.value;
+        });
+    
+        radioSeco.addEventListener('change', function() {
+            confirmedFloorCondition.innerText = radioSeco.value;
+        });
+    
+        radioUmido.addEventListener('change', function() {
+            confirmedFloorCondition.innerText = radioUmido.value;
+        });
+    </script>
+</body>
+</html>

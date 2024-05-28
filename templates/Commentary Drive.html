@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commentary Drive (CD)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 80%;
+            max-width: 1000px;
+            margin-top: 20px;
+        }
+        .header {
+            background-color: #8D0056;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            color: white;
+            padding: 10px;
+            font-size: 24px;
+        }
+
+        .form_box{
+            border: 1px solid #8D0056; /* Define a largura e a cor da borda */
+            border-radius: 5px; /* Define o arredondamento das bordas */
+            padding: 10px; /* Adiciona algum espaçamento interno, opcional */
+        }
+
+        .intro-text {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #555;
+            text-align: justify;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 3px;
+        }
+        .column {
+            display: inline-block;
+            width: 45%;
+            padding: 10px;
+            vertical-align: top;
+            margin-right: 5px;
+            border-right: 1px solid #ccc; /* Linha vertical de separação */
+        }
+        .column-title {
+            background-color:#8D0056;
+            color: white;
+            padding: 10px;
+            font-size: 14px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            margin-bottom: 10px;
+
+        }
+        .custom-radio {
+            display: inline-block;
+            background-color: #ffffff; /* Cor de fundo */
+            color: #8D0056; /* Cor das letras */
+            padding: 0px; /* Espaçamento interno para tornar os botões retangulares */
+            border-radius: 5px; /* Bordas arredondadas */
+            border: 2px solid #8D0056;
+            margin: 5px; /* Espaçamento entre os botões */
+            cursor: pointer; /* Cursor de ponteiro para indicar clicável */
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transição suave para mudanças de fundo */
+        }
+
+        .custom-radio:hover {
+            background-color: #8D0056; /* Cor de fundo ao passar o mouse */
+            color: white; /* Cor das letras ao passar o mouse */
+        }
+
+        .custom-radio input[type="radio"] {
+            display: none; /* Esconde o input original do radio button */
+        }
+
+        .custom-radio input[type="radio"]:checked + span {
+            background-color: #8D0056; /* Cor de fundo quando o radio button está selecionado */
+            color: white; /* Cor das letras quando selecionado */
+        }
+
+        .custom-radio span {
+            display: inline-block;
+            padding: 10px 20px; /* Mantém o espaçamento interno */
+            border-radius: 5px; /* Mantém as bordas arredondadas */
+            transition: background-color 0.3s, color 0.3s; /* Transição suave para mudanças de fundo e cor */
+        }
+        .question {
+            background-color: #ffffff;
+            font-size: 16px;
+	        text-align: justify;
+        }
+        .answer {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+	        height: 20px; /* Defina a altura desejada */
+	        word-wrap: break-word;
+    	    overflow: auto;
+    	    white-space: pre-wrap; 
+        }
+        .answer1 {
+            width: 40%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+	        height: 20px; /* Defina a altura desejada */
+	        word-wrap: break-word;
+    	    overflow: auto;
+    	    white-space: pre-wrap; 
+        }
+
+       .submit-button {
+            background-color: #8D0056;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .submit-button:hover {
+            background-color: #8D0056;
+        }
+        .button-container {
+            text-align: right;
+            margin-top: 20px;
+        }
+	    .images-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .left-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .center-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .right-images {
+            flex: 1;
+            text-align: right;
+        }
+
+        .image {
+            max-width: 150px;
+            margin: 10px;
+        }
+
+        .titles{
+            background-color: #8D0056;
+            color: white;
+            padding:1px;
+            font-size: 20px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            margin-bottom: 0px;
+        }
+
+        .button1{
+            border: 1px solid #ccc;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 35%;
+            text-align: center;
+        }
+
+        .button {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        color: #333;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+	<div class="images-container">
+            <div class="left-image">
+                <img src= "C:\Users\vinicius oshiro\.vscode\cepa\img\CEPA-MOBILITY_logo-principal 750px.png" alt="Imagem 1" class="image">
+            </div>
+            <div class="center-image">
+                <img src="C:\Users\vinicius oshiro\.vscode\cepa\img\fdm_pro.png" alt="Imagem 2" class="image">
+            </div>
+            <div class="right-images">
+                <img src="C:\Users\vinicius oshiro\.vscode\cepa\img\brazil-.png" alt="Imagem 3" class="image">
+            </div>
+        </div>
+      <img src="C:\Users\vinicius oshiro\PycharmProjects\CEPA\astrazeneca\logo astrazeneca.png" alt="Imagem" style="width: 100%; max-width: 200px; margin-top: 30px; margin-bottom: 20px">
+        <div class="header">Direção Comentada (DC)</div>
+        <div class="intro-text">
+            <p>O formulário de ride-along é uma ferramenta essencial para garantir a segurança da frota da AstraZeneca, pois permite avaliar de forma detalhada e objetiva o comportamento e as práticas dos condutores. Ao registrar aspectos como o uso correto do cinto de segurança, a manutenção do veículo e a conformidade com políticas de segurança, o formulário identifica áreas de melhoria e promove a conscientização sobre a importância do cumprimento de protocolos de segurança no trânsito. Além disso, ao incentivar a comunicação de qualquer alteração nas condições de saúde dos colaboradores que possa impactar sua habilidade de dirigir, o formulário ajuda a prevenir acidentes e garantir a integridade de todos os envolvidos nas operações da empresa.</p>
+        </div>
+        <form>
+            <fieldset class="form_box">
+                    <div class="titles"><p>Informações do Condutor</p></div>
+                    <br>
+                <div class="column">
+                    <label for="driver_name" class="question">Nome do Condutor:</label><br><br>
+                    <input type="text" name="driver_name" id="driver_name" class="answer">
+                    <br>
+                    <hr style="border-top: 1px solid #47474754;">
+                    <br>
+                    <label for="driver_email" class="question">Email do Condutor:</label><br><br>
+                    <input type="text" name="driver_email" id="driver_email" class="answer">
+                    <br>
+                    <hr style="border-top: 1px solid #47474754;">
+                    <br>
+                    <label for="state" class="question">BU/Unidade de Negócio:</label><br><br>
+                    <select name="state" id="state" class="answer">
+                        <option value="">Selecione a BU</option>
+                        <option value="CVRM">CVRM</option>
+                        <option value="Commercial">Commercial</option>
+                        <option value="Diretoria médica">Diretoria Médica</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Gov. & Reg Affairs & Diagnostic">Gov. & Reg Affairs & Diagnostic</option>
+                        <option value="Human Resources">Human Resources</option>
+                        <option value="Market Access">Market Access</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Oncology">Oncology</option>
+                        <option value="Operações">Operações</option>
+                        <option value="Presidency">Presidency</option>
+                        <option value="R&I">R&I</option>
+                        <option value="SFT">SFT</option>
+                    </select>
+                    <br>
+                    <hr style="border-top: 1px solid #47474754;">
+                    <br>
+                    <label for="date" class="question">Data de Realização:</label><br><br>
+                    <input type="date" name="date" id="date" class="answer1">
+                    <br>
+                </div>
+                <div class="column">
+                    <label for="inspec_name" class="question">Nome do Realizador:</label><br><br>
+                    <input type="text" name="inspec_name" id="inspec_name" class="answer">
+                    <br>
+                    <hr style="border-top: 1px solid #47474754;">
+                    <br>
+                    <label for="inspec_email" class="question">Email do Realizador:</label><br><br>
+                    <input type="text" name="inspec_email" id="inspec_email" class="answer">
+                    <br>
+                    <hr style="border-top: 1px solid #47474754;">
+                    <br>
+                    <label class="question">Estado:</label><br><br>
+                    <select name="state" id="state" class="answer">
+                        <option value="">Selecione o estado</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+                    <br>
+                    <hr style="border-top: 1px solid #47474754;">
+                    <br>
+                    <label for="city" class="question">Cidade:</label><br><br>
+                    <input type="text" name="city" id="city" class="answer">
+                    <br>
+                </div>
+                <br>
+                <div class="titles">
+                    <p>Questôes</p>
+                </div>
+                <br>
+                <div class="column">
+                    <label class="question">1.	O condutor utiliza corretamente o cinto de segurança e cumpre com a política AZB de utilização de telefone celular? 
+                    <br>
+                    <br>
+                    <label class="custom-radio">
+                    <input type="radio" name="q1" value="Sim" id="radio-sim">
+                    <span>Sim</span>
+                    </label>
+                    </label>
+                    <label>
+                    <label class="custom-radio">
+                    <input type="radio" name="q1" value="Não" id="radio">
+                    <span>Não</span>
+                    </label>
+                    </label>
+                    </label>
+                    <br>
+                    <hr style="border-top: 1px solid #47474754;">
+                    <br>
+                    <label class="question">2.	O encosto de cabeça está ajustado corretamente de modo que a parte superior do encosto de cabeça fique nivelada com a parte superior da cabeça do condutor / passageiro.
+                    <br>
+                    <br>
+                    <label class="custom-radio">
+                    <input type="radio" name="q2" value="Sim" id="radio-sim">
+                    <span>Sim</span>
+                    </label>
+                    </label>
+                    <label>
+                    <label class="custom-radio">
+                    <input type="radio" name="q2" value="Não" id="radio-nao">
+                    <span>Não</span>
+                    </label>
+                    </label>
+                    </label>
+                    <br>
+                    <hr style="border-top: 1px solid #47474754;">
+                    <br>
+                    <label class="question">3.	O condutor mantém velocidade compatível com as condições da estrada e clima? 
+                    <br>
+                    <br>
+                    <label class="custom-radio">
+                    <input type="radio" name="q3" value="Sim" id="radio-sim">
+                    <span>Sim</span>
+                    </label>
+                    </label>
+                    <label>
+                    <label class="custom-radio">
+                    <input type="radio" name="q3" value="Não" id="radio-nao">
+                    <span>Não</span>
+                    </label>
+                    </label>
+                    </label>
+                    <br>
+                    <hr style="border-top: 1px solid #47474754;">
+                    <br>
+                    <label class="question">4.	O condutor demonstra comportamento adequado com relação aos outros motoristas? 
+                    <br>
+                    <br>
+                    <label class="custom-radio">
+                    <input type="radio" name="q4" value="Sim" id="radio-sim">
+                    <span>Sim</span>
+                    </label>
+                    </label>
+                    <label>
+                    <label class="custom-radio">
+                    <input type="radio" name="q4" value="Não" id="radio-nao">
+                    <span>Não</span>
+                    </label>
+                    </label>
+                    </label>
+                    <br>
+                    <hr style="border-top: 1px solid #47474754;">
+                    <br>
+                </div>
+                <div class="column">
+                    <label class="question">5.	O condutor cumpriu com a sua responsabilidade em comunicar ao seu superior imediato quaisquer implicações relativas a sua Carteira Nacional de Habilitação, tais como multas, pontuação ou quaisquer outros impedimentos do ato de dirigir?  
+                    <br>
+                    <br>
+                    <label class="custom-radio">
+                    <input type="radio" name="q5" value="Sim" id="radio-sim">
+                    <span>Sim</span>
+                    </label>
+                    </label>
+                    <label>
+                    <label class="custom-radio">
+                    <input type="radio" name="q5" value="Não" id="radio-nao">
+                    <span>Não</span>
+                    </label>
+                    </label>
+                    </label>
+                    <br>
+                    <hr style="border-top: 1px solid #47474754;">
+                    <br>
+                    <label class="question">6.	O veículo está em boas condições de uso? Por exemplo: pneus em boas condições, aspecto geral de limpeza interno e externo aceitáveis, faróis e setas funcionando?
+                    <br>
+                    <br>
+                    <label class="custom-radio">
+                    <input type="radio" name="q6" value="Sim" id="radio-sim">
+                    <span>Sim</span>
+                    </label>
+                    </label>
+                    <label>
+                    <label class="custom-radio">
+                    <input type="radio" name="q6" value="Não" id="radio-nao">
+                    <span>Não</span>
+                    </label>
+                    </label>
+                    </label>
+                    <br>
+                    <hr style="border-top: 1px solid #47474754;">
+                    <br>
+                    <label class="question">7.	O colaborador cumpriu com sua responsabilidade em comunicar ao seu superior imediato, departamento de saúde AZB e a autoridade competente sobre quaisquer alterações em suas condições de saúde, que impactem em sua habilidade de dirigir? Por exemplo: obrigatoriedade do uso de lentes corretivas, uso de medicamentos, etc.
+                    <br>
+                    <br>
+                    <label class="custom-radio">
+                    <input type="radio" name="q7" value="Sim" id="radio-sim">
+                    <span>Sim</span>
+                    </label>
+                    </label>
+                    <label>
+                    <label class="custom-radio">
+                    <input type="radio" name="q7" value="Não" id="radio-nao">
+                    <span>Não</span>
+                    </label>
+                    </label>
+                    </label>
+                    <br>
+                    <hr style="border-top: 1px solid #47474754;">
+                    <br>
+                </div>
+                <div class="'column">
+                    <br>
+                    <label class="question">8.  Comentários Gerais:</label>
+                    <br>
+                    <br>
+                    <textarea class="answer" name="general_comment" id="general_comment" placeholder="Insira aqui o(s) comentário(s):"></textarea>
+                    <br>
+                </div>
+            </fieldset>
+        </form>
+            <div class="button-container">
+                <button type="submit" class="submit-button">Enviar Respostas</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
